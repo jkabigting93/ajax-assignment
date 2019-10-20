@@ -21,3 +21,8 @@ var topics = [
     "Pie",
     "Cheese"
 ]
+
+for (var i=0; i < topics.length; i++) {
+    var buttons = $("<button>" + topics[i] +"</button>")
+    buttons.appendTo("#topics")
+}
