@@ -23,12 +23,12 @@ var topics = [
 ]
 
 for (var i=0; i < topics.length; i++) {
-    var buttons = $("<button>" + topics[i] +"</button>");
+    var buttons = $("<button class='food'>" + topics[i] +"</button>");
     buttons.attr("data-food", topics[i]);
     buttons.appendTo("#topics")
 }
 
-$("button").on("click", function() {
+$(".food").on("click", function() {
     var food = $(this).attr("data-food");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + food + "&api_key=0VDHwVBWaKzALlyWIxWLGAb6wsIQYDzd&limit=10&rating=g";
 
