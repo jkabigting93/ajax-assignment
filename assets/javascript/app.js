@@ -1,3 +1,4 @@
+// Array that loads with the page by default
 var topics = [
     "Pasta",
     "Sushi",
@@ -22,12 +23,14 @@ var topics = [
     "Cheese"
 ]
 
+// For loop that runs on page load to generate buttons from array
 for (var i=0; i < topics.length; i++) {
     var buttons = $("<button class='food'>" + topics[i] +"</button>");
     buttons.attr("data-food", topics[i]);
     buttons.appendTo("#topics");
 };
 
+// Click handler that runs AJAX call based on data-food attribute of selected button
 $(".food").on("click", function() {
     var food = $(this).attr("data-food");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + food + "&api_key=0VDHwVBWaKzALlyWIxWLGAb6wsIQYDzd&limit=10&rating=g";
@@ -50,10 +53,13 @@ $(".food").on("click", function() {
     });
 });
 
+// Search button click handler that adds searched term to button list
 $("#searchButton").on("click", function searchForFood() {
     searchValue = document.getElementById("search").value;
     topics.push(searchValue);
     $("#topics").html("");
+
+// Rerun both the for loop and AJAX call on this new array - needed because of "return false" declared later
     for (var i=0; i < topics.length; i++) {
         var buttons = $("<button class='food'>" + topics[i] +"</button>");
         buttons.attr("data-food", topics[i]);
@@ -80,5 +86,7 @@ $("#searchButton").on("click", function searchForFood() {
             }
         });
     });
+
+// This last line stops the page from reloading the default array buttons, which would not have any foods searched by the user
     return false;
 });
