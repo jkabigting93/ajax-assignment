@@ -25,17 +25,17 @@ var topics = [
 for (var i=0; i < topics.length; i++) {
     var buttons = $("<button class='food'>" + topics[i] +"</button>");
     buttons.attr("data-food", topics[i]);
-    buttons.appendTo("#topics")
-}
+    buttons.appendTo("#topics");
+};
 
 $(".food").on("click", function() {
     var food = $(this).attr("data-food");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + food + "&api_key=0VDHwVBWaKzALlyWIxWLGAb6wsIQYDzd&limit=10&rating=g";
-
+    
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function(response){
+    }).then(function(response) {
         var results = response.data;
         for (var i=0; i < results.length; i++) {
             var gifDiv = $("<div>");
@@ -48,4 +48,37 @@ $(".food").on("click", function() {
             $("#gifsHereDiv").prepend(gifDiv);
         }
     });
+});
+
+$("#searchButton").on("click", function searchForFood() {
+    searchValue = document.getElementById("search").value;
+    topics.push(searchValue);
+    $("#topics").html("");
+    for (var i=0; i < topics.length; i++) {
+        var buttons = $("<button class='food'>" + topics[i] +"</button>");
+        buttons.attr("data-food", topics[i]);
+        buttons.appendTo("#topics")
+    };
+    $(".food").on("click", function() {
+        var food = $(this).attr("data-food");
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + food + "&api_key=0VDHwVBWaKzALlyWIxWLGAb6wsIQYDzd&limit=10&rating=g";
+        
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function(response) {
+            var results = response.data;
+            for (var i=0; i < results.length; i++) {
+                var gifDiv = $("<div>");
+                var rating = results[i].rating;
+                var p = $("<p>").text("Rating: " + rating);
+                var gif = $("<img>");
+                gif.attr("src", results[i].images.fixed_height.url);
+                gifDiv.prepend(p);
+                gifDiv.prepend(gif);
+                $("#gifsHereDiv").prepend(gifDiv);
+            }
+        });
+    });
+    return false;
 });
