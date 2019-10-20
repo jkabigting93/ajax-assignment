@@ -23,11 +23,28 @@ var topics = [
 ]
 
 for (var i=0; i < topics.length; i++) {
-    var buttons = $("<button>" + topics[i] +"</button>")
+    var buttons = $("<button data-food = topics[i]>" + topics[i] +"</button>")
     buttons.appendTo("#topics")
 }
 
-var xhr = $.get("http://api.giphy.com/v1/gifs/search?q=" + searchQuery + "&api_key=0VDHwVBWaKzALlyWIxWLGAb6wsIQYDzd&limit=10&rating=g");
-xhr.done(function(data) {
-    console.log("AJAX Call Successful! Data: ", data);
+$("button").on("click", function() {
+    var food = $(this).attr("data-food");
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + food + "&api_key=0VDHwVBWaKzALlyWIxWLGAb6wsIQYDzd&limit=10&rating=g";
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function(response){
+        var results = response.data;
+        for (var i=0; i < results.length; i++) {
+            var gifDiv = $("<div>");
+            var rating = results[i].rating;
+            var p = $("<p>").text("Rating: " + rating);
+            var gif = $("<img>");
+            gif.attr("src", results[i].images.fixed_height.url);
+            gifDiv.prepend(p);
+            gifDiv.prepend(gif);
+            $("#gifsHereDiv").prepend(gifDiv);
+        }
+    });
 });
