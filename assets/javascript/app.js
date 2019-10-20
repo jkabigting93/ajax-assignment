@@ -59,7 +59,7 @@ $("#searchButton").on("click", function searchForFood() {
     topics.push(searchValue);
     $("#topics").html("");
 
-// Rerun both the for loop and AJAX call on this new array - needed because of "return false" declared later
+// Rerun both the for loop and AJAX call on this new array, within the same function that added the new button - needed because of "return false" declared later
     for (var i=0; i < topics.length; i++) {
         var buttons = $("<button class='food'>" + topics[i] +"</button>");
         buttons.attr("data-food", topics[i]);

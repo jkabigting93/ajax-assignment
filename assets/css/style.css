@@ -1,0 +1,19 @@
+body {
+    background-image: url(../images/greek-vase.png);
+    font-family: 'Montserrat', sans-serif;
+    padding: 20px 30px 20px 30px;
+}
+
+h1 {
+    font-size: 40px;
+    font-family: 'Alice', serif;
+}
+
+button {
+    margin: 5px;
+    background-color: green;
+    border-radius: 4px;
+    color: white;
+    padding: 10px;
+    border: 0px;
+}
