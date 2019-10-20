@@ -23,7 +23,8 @@ var topics = [
 ]
 
 for (var i=0; i < topics.length; i++) {
-    var buttons = $("<button data-food = topics[i]>" + topics[i] +"</button>")
+    var buttons = $("<button>" + topics[i] +"</button>");
+    buttons.attr("data-food", topics[i]);
     buttons.appendTo("#topics")
 }
 
