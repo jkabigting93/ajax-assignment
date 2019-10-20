@@ -26,3 +26,8 @@ for (var i=0; i < topics.length; i++) {
     var buttons = $("<button>" + topics[i] +"</button>")
     buttons.appendTo("#topics")
 }
+
+var xhr = $.get("http://api.giphy.com/v1/gifs/search?q=" + searchQuery + "&api_key=0VDHwVBWaKzALlyWIxWLGAb6wsIQYDzd&limit=10&rating=g");
+xhr.done(function(data) {
+    console.log("AJAX Call Successful! Data: ", data);
+});
