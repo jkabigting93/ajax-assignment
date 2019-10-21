@@ -7,6 +7,11 @@ body {
 h1 {
     font-size: 40px;
     font-family: 'Alice', serif;
+    margin-bottom: 10px;
+}
+
+#topics {
+    margin-bottom: 15px;
 }
 
 button {
@@ -20,4 +25,15 @@ button {
 
 p {
     margin-bottom: 15px;
+    display: inline-block;
+}
+
+#gifsHereDiv {
+    text-align: center;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
