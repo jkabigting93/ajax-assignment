@@ -87,6 +87,19 @@ $("#searchButton").on("click", function searchForFood() {
         });
     });
 
+// Functionality to start and stop GIF animations on click
+    $("img").on("click", function() {
+        if (src === "results[i].images_fixed_height_still.url") {
+            $("img").attr({
+                "src": "results[i].images_fixed_height.url"
+            })
+        } else {
+            $("img").attr({
+                "src": "results[i].images_fixed_height_still.url"
+            })
+        };
+    });
+
 // This last line stops the page from reloading the default array buttons, which would not have any foods searched by the user
     return false;
 });
