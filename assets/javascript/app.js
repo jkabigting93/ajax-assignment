@@ -45,10 +45,23 @@ $(".food").on("click", function() {
             var rating = results[i].rating;
             var p = $("<p>").text("Rating: " + rating);
             var gif = $("<img>");
-            gif.attr("src", results[i].images.fixed_height.url);
+            gif.attr("src", results[i].images.fixed_height_still.url);
+            gif.attr("class", "gif");
             gifDiv.prepend(p);
             gifDiv.prepend(gif);
             $("#gifsHereDiv").prepend(gifDiv);
+        }
+    });
+    
+// Functionality to start and stop GIF animations on click
+    $("body").on("click", ".gif", function() {
+        var src = $(this).attr("src");
+        if ($(this).hasClass("playing")) {
+            $(this).attr("src", src.replace(/\.gif/i, "_s.gif"))
+            $(this).removeClass("playing");
+        } else {
+            $(this).addClass("playing");
+            $(this).attr("src", src.replace(/\_s.gif/i, ".gif"))
         }
     });
 });
@@ -59,7 +72,7 @@ $("#searchButton").on("click", function searchForFood() {
     topics.push(searchValue);
     $("#topics").html("");
 
-// Rerun both the for loop and AJAX call on this new array, within the same function that added the new button - needed because of "return false" declared later
+// Rerun the for loop, AJAX call, and pause/play on this new array, within the same function that added the new button - needed because of "return false" declared later
     for (var i=0; i < topics.length; i++) {
         var buttons = $("<button class='food'>" + topics[i] +"</button>");
         buttons.attr("data-food", topics[i]);
@@ -80,24 +93,22 @@ $("#searchButton").on("click", function searchForFood() {
                 var p = $("<p>").text("Rating: " + rating);
                 var gif = $("<img>");
                 gif.attr("src", results[i].images.fixed_height_still.url);
+                gif.attr("class", "gif");
                 gifDiv.prepend(p);
                 gifDiv.prepend(gif);
                 $("#gifsHereDiv").prepend(gifDiv);
             }
         });
-    });
-
-// Functionality to start and stop GIF animations on click
-    $("img").on("click", function() {
-        if (src === "results[i].images_fixed_height_still.url") {
-            $("img").attr({
-                "src": "results[i].images_fixed_height.url"
-            })
-        } else {
-            $("img").attr({
-                "src": "results[i].images_fixed_height_still.url"
-            })
-        };
+        $("img").on("click", ".gif", function() {
+            var src = $(this).attr("src");
+            if ($(this).hasClass("playing")) {
+                $(this).attr("src", src.replace(/\.gif/i, "_s.gif"))
+                $(this).removeClass("playing");
+            } else {
+                $(this).addClass("playing");
+                $(this).attr("src", src.replace(/\_s.gif/i, ".gif"))
+            }
+        });
     });
 
 // This last line stops the page from reloading the default array buttons, which would not have any foods searched by the user
